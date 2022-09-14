@@ -5,6 +5,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { ErrorModel } from '../models/error.model';
 import { QueryModel } from '../models/query.model';
 import { ApiEndpoints } from '../global/endpoints';
+import { TempEnv } from 'temp.env';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,21 @@ export class NetworkService {
     return this.httpClient
       .get<any>(url)
       .pipe(catchError(this.handleError<ErrorModel>('Error occured')));
+  }
+
+  getGeoCities(input: string): Observable<any> {
+    const urlSearchParams = new URLSearchParams();
+    urlSearchParams.append('name', input);
+    urlSearchParams.append('limit', '100');
+
+    const url = ApiEndpoints.geoApiEndpoint + '?' + urlSearchParams;
+
+    return (
+      this.httpClient
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        .get<any>(url, { headers: { 'X-Api-Key': TempEnv.geoApiKey } })
+        .pipe(catchError(this.handleError<ErrorModel>('Error occured')))
+    );
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
