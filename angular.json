@@ -30,7 +30,7 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+            "styles": ["src/theme/colors.scss", "src/theme/dimensions.scss", "src/global.scss"],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,

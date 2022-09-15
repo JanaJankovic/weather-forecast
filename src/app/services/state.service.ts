@@ -1,16 +1,25 @@
 /* eslint-disable curly */
 import { Injectable } from '@angular/core';
 import { CityModel } from '../models/city.model';
+import { EventService } from './event.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StateService {
-  public currentCity: CityModel;
-
+  private currentCity: CityModel;
   private favoriteCities: CityModel[] = [];
 
-  constructor() {}
+  constructor(private eventService: EventService) {}
+
+  public getCurrentCity(): CityModel {
+    return this.currentCity;
+  }
+
+  public setCurrentCity(city: CityModel) {
+    this.currentCity = city;
+    this.eventService.publishCity(city);
+  }
 
   public getFavorites(): CityModel[] {
     return this.favoriteCities;

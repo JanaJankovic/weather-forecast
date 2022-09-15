@@ -8,6 +8,8 @@ import { IonicModule } from '@ionic/angular';
 import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
+import { Geolocation } from '@awesome-cordova-plugins/geolocation/ngx';
+import { Utils } from 'src/app/global/utils';
 
 @NgModule({
   imports: [
@@ -15,8 +17,9 @@ import { HomePage } from './home.page';
     FormsModule,
     IonicModule,
     HomePageRoutingModule,
-    TranslateModule.forChild(),
+    TranslateModule.forChild()
   ],
   declarations: [HomePage],
+  providers: [Geolocation],
 })
 export class HomePageModule {}

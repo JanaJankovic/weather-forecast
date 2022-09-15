@@ -6,6 +6,8 @@ import { ErrorModel } from '../models/error.model';
 import { QueryModel } from '../models/query.model';
 import { ApiEndpoints } from '../global/endpoints';
 import { TempEnv } from 'temp.env';
+import { WeatherModel } from '../models/weather.model';
+import { ForecastModel } from '../models/forecast.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,7 @@ import { TempEnv } from 'temp.env';
 export class NetworkService {
   constructor(private httpClient: HttpClient) {}
 
-  getCurrentWeather(query: QueryModel): Observable<any> {
+  getCurrentWeather(query: QueryModel): Observable<WeatherModel> {
     const url =
       ApiEndpoints.currentWeatherApiEndpoint + '?' + query.getQueryUrl();
     return this.httpClient
@@ -21,7 +23,7 @@ export class NetworkService {
       .pipe(catchError(this.handleError<ErrorModel>('Error occured')));
   }
 
-  getForecast(query: QueryModel): Observable<any> {
+  getForecast(query: QueryModel): Observable<ForecastModel> {
     const url = ApiEndpoints.forecastApiEndpoint + '?' + query.getQueryUrl();
     return this.httpClient
       .get<any>(url)
@@ -41,6 +43,14 @@ export class NetworkService {
         .get<any>(url, { headers: { 'X-Api-Key': TempEnv.geoApiKey } })
         .pipe(catchError(this.handleError<ErrorModel>('Error occured')))
     );
+  }
+
+  getReverseGeoCity(query: QueryModel): Observable<any> {
+    const url = ApiEndpoints.reverseGeoApiEndoipint + '?' + query.getQueryUrl();
+    return this.httpClient
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      .get<any>(url, { headers: { 'X-Api-Key': TempEnv.geoApiKey } })
+      .pipe(catchError(this.handleError<ErrorModel>('Error occured')));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

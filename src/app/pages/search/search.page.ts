@@ -32,9 +32,12 @@ export class SearchPage implements OnInit {
     this.input = '';
     this.cities = [];
 
-    this.stateService.currentCity.lat = obj.lat;
-    this.stateService.currentCity.lon = obj.lon;
-    this.stateService.currentCity.name = obj.name;
+    this.stateService.setCurrentCity({
+      lat : obj.lat,
+      lon: obj.lon,
+      name: obj.name,
+      country: obj.country
+    });
 
     this.router.navigate(['/home']);
   }
