@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   {
@@ -21,13 +21,6 @@ const routes: Routes = [
     path: 'maps',
     loadChildren: () =>
       import('./pages/maps/maps.module').then((m) => m.MapsPageModule),
-  },
-  {
-    path: 'favorites',
-    loadChildren: () =>
-      import('./pages/favorites/favorites.module').then(
-        (m) => m.FavoritesPageModule
-      ),
   },
   {
     path: 'settings',

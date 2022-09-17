@@ -5,5 +5,22 @@
   "favorites": "Favorites",
   "settings": "Settings",
   "acquired": "Acquired",
-  "forecast": "Weather Forecast"
+  "forecast": "Weather Forecast",
+  "feelsLike": "Feels like",
+  "tempMin": "Minimal temperature",
+  "tempMax": "Maximal temperature",
+  "windSpeed": "Wind speed",
+  "windDeg": "Wind degree",
+  "humidity": "Humidity",
+  "pressure": "Pressure",
+  "weatherDescription":"Weather description",
+  "weather": "Weather details",
+  "forecast5": "Forecast for 5 days",
+  "clickForecast": "Click here to see forecast",
+  "selectLang": "Select language",
+  "selectUnit": "Select units of measure",
+  "standard": "Standard",
+  "imperial": "Imperial",
+  "metric": "Metric",
+  "darkTheme": "Dark theme"
 }

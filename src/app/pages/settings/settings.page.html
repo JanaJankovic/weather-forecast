@@ -14,8 +14,39 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI
-        Components</a></p>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-list *ngIf="settings !== undefined">
+
+        <ion-item>
+          <ion-select
+          placeholder="{{'selectLang' | translate}}"
+          (ionChange)="handleUpdate($event)"
+          [(ngModel)]="settings.lang">
+            <ion-select-option *ngFor="let lang of langs" value={{lang.code}}>
+              {{lang.label}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-select
+          placeholder="{{'selectUnit' | translate}}"
+          (ionChange)="handleUpdate($event)"
+          [(ngModel)]="settings.unit">
+            <ion-select-option *ngFor="let unit of units" value={{unit}}>
+              {{unit | translate}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <ion-label>{{'darkTheme' | translate}}</ion-label>
+          <ion-toggle slot="end" [(ngModel)]="settings.darkTheme"
+          (ionChange)="handleUpdate($event)"></ion-toggle>
+        </ion-item>
+
+      </ion-list>
+    </ion-row>
+  </ion-grid>
 </ion-content>

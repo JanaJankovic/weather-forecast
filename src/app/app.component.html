@@ -17,9 +17,9 @@
         <ion-list id="labels-list">
           <ion-list-header>{{ "favorites" | translate }}</ion-list-header>
 
-          <ion-item *ngFor="let favorite of favorites" lines="none">
-            <ion-icon slot="start" ios="bookmark-outline" md="bookmark-sharp"></ion-icon>
-            <ion-label>{{ favorite }}</ion-label>
+          <ion-item *ngFor="let favorite of favorites" lines="none" (click)="onFavClick(favorite)">
+            <ion-icon slot="start" ios="location-outline" md="location-sharp"></ion-icon>
+            <ion-label>{{ favorite.name }}, {{favorite.country}}</ion-label>
           </ion-item>
         </ion-list>
       </ion-content>

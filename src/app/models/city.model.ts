@@ -1,6 +1,6 @@
 export class CityModel {
-  public name: string;
-  public country: string;
-  public lat: number;
-  public lon: number;
+  name: string;
+  country: string;
+  lat: number;
+  lon: number;
 }

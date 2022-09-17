@@ -1,11 +1,11 @@
 import { TempEnv } from 'temp.env';
 
 export class QueryModel {
-  public lat: number;
-  public lon: number;
-  public units?: string;
-  public lang?: string;
-  public cnt?: number;
+  lat: number;
+  lon: number;
+  units?: string;
+  lang?: string;
+  cnt?: number;
 
   public getQueryUrl() {
     const urlSearchParams = new URLSearchParams();

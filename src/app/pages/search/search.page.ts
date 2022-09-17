@@ -33,8 +33,8 @@ export class SearchPage implements OnInit {
     this.cities = [];
 
     this.stateService.setCurrentCity({
-      lat : obj.lat,
-      lon: obj.lon,
+      lat : obj.latitude,
+      lon: obj.longitude,
       name: obj.name,
       country: obj.country
     });
