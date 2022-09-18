@@ -1,5 +1,5 @@
-ion-menu-button {
-  color: var(--ion-color-primary);
+ion-button {
+  background-color: transparent;
 }
 
 #container {
@@ -29,12 +29,113 @@ ion-menu-button {
 
 #main-icon {
     font-size: var(--main-icon-size);
+    margin-bottom: 5%;
+}
+
+#resizableContent {
+  margin : 16px;
+}
+
+#controls {
+  display: flex;
+  justify-content: space-between;
+
+  ion-button {
+    color: var(--ion-text-color);
+  }
+
+}
+
+#timestamp {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
+  color: var(--ion-color-primary);
+
+  div {
+    display: flex; flex-direction: column; align-items: center;
+  }
+
+  ion-title {
+    text-align: center;
+  }
+}
+
+#small-title {
+  color: var(--ion-color-primary-shade);
+  margin: 5px;
+  letter-spacing: 2px;
+}
+
+#data-content {
+  height: inherit;
+  margin-top: 20px;
+}
+
+#weather-col {
+  height: inherit;
+  width: 100%;
+}
+
+#weather-content > ion-title {
+  margin-bottom: 20px;
 }
 
 #weather-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(max(200px, 49%), 2fr));
   grid-gap: 0.1em;
+  width: 100%
+
+}
+
+.data-card {
+  padding: 15px;
+}
+
+.data-card > ion-title {
+    margin-top: 10px;
+    text-align: center;
+    color: var(--ion-text-color);
+}
+
+#weather-grid > * > ion-label {
+  margin-bottom: 10px;
+}
+
+#forecast-col > ion-title {
+  margin-bottom: 20px;
+}
+
+@media screen and (min-width: 768px) and (min-height: 768px) {
+  #resizableContent {
+    margin : 32px;
+
+    #data-content {
+      overflow-y: scroll;
+      height: 460px;
+    }
+
+    #weather-col {
+      position: relative;
+    }
+
+    #weather-content  {
+      top: 0;
+      position: sticky;
+    }
+  }
+}
+
+@media screen and (max-width: 321px) and (max-height: 481px) {
+  #forecast-list > ion-item {
+    font-size: smaller;
+    height: fit-content;
+  }
+
+  #forecast-list > ion-item > ion-label {
+    font-size: smaller;
+  }
 }
 
 

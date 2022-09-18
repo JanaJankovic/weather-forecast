@@ -44,7 +44,13 @@ export class Utils {
     return 'help-circle-outline';
   }
 
-  public static toDatetimeString(dt: number): string{
-    return moment(dt).format('DD.MM.YYYY hh:mm');
+  public static toDatetimeString(dt: number, lang: string): string{
+    moment.locale(lang);
+    return moment(dt * 1000).format('dddd, DD.MM.YYYY HH:mm');
+  }
+
+  public static toDatetimeShortString(dt: number, lang: string): string{
+    moment.locale(lang);
+    return moment(dt * 1000).format('dddd HH:mm');
   }
 }

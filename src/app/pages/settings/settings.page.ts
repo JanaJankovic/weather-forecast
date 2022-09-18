@@ -20,7 +20,7 @@ export class SettingsPage implements OnInit {
     this.settings = this.stateService.getSettings();
     this.settings = this.settings !== undefined
         ? this.settings
-        : { lang: 'en', unit: 'standard', darkTheme: false };
+        : { lang: 'en', unit: 'standard'};
   }
 
   handleUpdate(e) {

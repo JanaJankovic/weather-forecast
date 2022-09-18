@@ -5,5 +5,21 @@
   "favorites": "Priljubljeno",
   "settings": "Nastavitve",
   "acquired": "Pridobljeno",
-  "forecast": "Vremenska napoved"
+  "forecast": "Vremenska napoved",
+  "tempMin": "Najnižja temperatura",
+  "tempMax": "Najvišja temperatura",
+  "windSpeed": "Hitrost vetra",
+  "windDeg": "Kot vetra",
+  "humidity": "Vlaga",
+  "pressure": "Zračni tlak",
+  "weatherDescription":"Opis",
+  "weather": "Trenutno vreme",
+  "forecast5": "Napoved za 5 dni",
+  "clickForecast": "Klikni za ogled napovedi",
+  "selectLang": "Izberi jezik",
+  "selectUnit": "Izberi enoto mere",
+  "standard": "Standardna",
+  "imperial": "Imperialna",
+  "metric": "Metrična",
+  "temp": "Temperatura"
 }

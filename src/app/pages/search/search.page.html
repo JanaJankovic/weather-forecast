@@ -18,11 +18,11 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-searchbar (ionChange)="getData()" [(ngModel)]="input"></ion-searchbar>
+          <ion-searchbar (ionChange)="getData()" [(ngModel)]="input" placeholder="{{'search' | translate}}"></ion-searchbar>
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-list>
+    <ion-list *ngIf="cities !== undefined && cities.length > 0">
       <ion-item *ngFor="let city of cities" (click)="itemClicked(city)">
         <ion-label>{{city.name}}, {{city.country}}</ion-label>
       </ion-item>
