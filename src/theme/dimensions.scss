@@ -1,0 +1,18 @@
+:root {
+  --main-icon-size: 7em;
+  --max-side-menu-width: 400px;
+  --ion-grid-width-xs: 320px;
+}
+
+ion-toolbar {
+  --min-height: 44px !important;
+  height: 44px !important;
+}
+
+@media screen and (min-height: 768px) and (min-width: 768px) {
+  ion-toolbar {
+    --min-height: 56px !important;
+    height: 56px !important;
+  }
+}
+

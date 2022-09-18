@@ -1,0 +1,121 @@
+<ion-header [translucent]="true">
+  <!--TOOLBAR FOR MOBILE-->
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{'home' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <!--TOOLBAR FULLSCREEEN -->
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{'home' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!--RESIZABLE CONTENT -->
+  <ion-grid *ngIf="weather !== undefined" id="resizableContent">
+
+  <!--BUTTON CONTROLS ROW -->
+    <ion-row id="controls">
+
+      <!--FAVORITES CONTROL BUTTON -->
+      <ion-button *ngIf="weather !== undefined" (click)="onFavoritesBtnClick()" fill="clear" shape="round">
+        <ion-icon size="large" name="heart-outline" *ngIf="isInFavorites === false" ></ion-icon>
+        <ion-icon size="large" name="heart" *ngIf="isInFavorites !== false"></ion-icon>
+      </ion-button>
+
+      <!--REFRESH CONTROL BUTTON -->
+      <ion-button (click)="getData()" fill="clear" shape="round">
+        <ion-icon size="large" name="refresh-outline"></ion-icon>
+      </ion-button>
+    </ion-row>
+
+  <!--TIMESTAMP ROW-->
+    <ion-row id="timestamp">
+      <div>
+        <ion-icon id="main-icon" name={{weather.weather[0].ionic}}></ion-icon>
+        <ion-title>{{currentCity.name}}, {{currentCity.country}}</ion-title>
+        <ion-title size="small" id="small-title">{{'acquired' | translate}}: {{weather.datetime}}</ion-title>
+      </div>
+    </ion-row>
+
+    <!--WEATHER DATA ROW -->
+    <ion-row id="data-content">
+
+      <!--WEATHER DETAILS COLUMN -->
+      <ion-col sizeMd="6" sizeSm="6" sizeXs="12" id="weather-col">
+        <div id="weather-content">
+          <ion-title>{{'weather' | translate}}</ion-title>
+          <div id="weather-grid">
+            <ion-card class="data-card">
+              <ion-label>{{'weatherDescription' | translate}}</ion-label>
+              <ion-title>{{weather.weather[0].description}} </ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'temp' | translate}}</ion-label>
+              <ion-title>
+                {{weather.main.temp}}
+                {{settings.unit === 'standard' ? '°K' : settings.unit === 'metric' ? '°C' : '°F' }}
+              </ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'tempMin' | translate}}</ion-label>
+              <ion-title>
+                {{weather.main.temp_min}}
+                {{settings.unit === 'standard' ? '°K' : settings.unit === 'metric' ? '°C' : '°F' }}
+              </ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'tempMax' | translate}}</ion-label>
+              <ion-title>
+                {{weather.main.temp_max}}
+                {{settings.unit === 'standard' ? '°K' : settings.unit === 'metric' ? '°C' : '°F' }}
+              </ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'windSpeed' | translate}}</ion-label>
+              <ion-title>
+                {{weather.wind.speed}}
+                {{settings.unit === 'imperial' ? 'mph' : 'm/s' }}
+              </ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'windDeg' | translate}}</ion-label>
+              <ion-title>{{weather.wind.deg}} °</ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'humidity' | translate}}</ion-label>
+              <ion-title>{{weather.main.humidity}} %</ion-title>
+            </ion-card>
+            <ion-card class="data-card">
+              <ion-label>{{'pressure' | translate}}</ion-label>
+              <ion-title>{{weather.main.pressure}} hPa</ion-title>
+            </ion-card>
+          </div>
+        </div>
+      </ion-col>
+
+      <!--FORECAST FOR 5 DAYS COL -->
+      <ion-col sizeMd="6" sizeSm="6" sizeXs="12" id="forecast-col" *ngIf="forecast !== undefined">
+        <ion-title>{{'forecast5' | translate}}</ion-title>
+        <ion-list id="forecast-list">
+          <ion-item (click)="onItemListClick(el)" *ngFor="let el of forecast.list">
+            <ion-label slot="start">{{el.datetime}}</ion-label>
+            <ion-label slot={{smallIconAlignment}}>
+              {{el.main.temp}}
+              {{settings.unit === 'standard' ? '°K' : settings.unit === 'metric' ? '°C' : '°F' }}
+            </ion-label>
+            <ion-icon slot="end" name={{el.weather[0].ionic}}></ion-icon>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+
+</ion-content>

@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <!--TOOLBAR MOBILE-->
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{'search' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+  <!--TOOLBAR FULLSCREEN-->
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title>{{'search' | translate }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <div id="container">
+    <!--SEARCHBAR-->
+    <ion-row>
+        <ion-searchbar (ionChange)="getData()" [(ngModel)]="input" placeholder="{{'search' | translate}}"></ion-searchbar>
+    </ion-row>
+
+    <!--LIST OF RECEIVED CITIES-->
+    <ion-list *ngIf="cities !== undefined && cities.length > 0">
+      <ion-item *ngFor="let city of cities" (click)="itemClicked(city)">
+        <ion-label>{{city.name}}, {{city.country}}</ion-label>
+      </ion-item>
+    </ion-list>
+
+  </div>
+</ion-content>

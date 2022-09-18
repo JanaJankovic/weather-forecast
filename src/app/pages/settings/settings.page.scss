@@ -1,0 +1,21 @@
+
+ion-row {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+ion-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin : 16px;
+}
+
+@media screen and (min-width: 768px) and (min-height: 768px) {
+  ion-list {
+    margin : 32px;
+    width: 50%;
+  }
+
+}
