@@ -7,6 +7,7 @@ import { PageModel } from './models/page.model';
 import { EventService } from './services/event.service';
 import { Router } from '@angular/router';
 import { SettingsModel } from './models/settings.model';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -23,7 +24,8 @@ export class AppComponent implements OnInit {
     private translateService: TranslateService,
     private stateService: StateService,
     private eventService: EventService,
-    private router: Router
+    private router: Router,
+    private menu: MenuController
   ) {}
 
 
@@ -50,6 +52,7 @@ export class AppComponent implements OnInit {
   }
 
   public onFavClick(city: CityModel) {
+    this.menu.close('main-menu');
     this.stateService.setCurrentCity(city);
     this.router.navigate(['/home']);
   }
