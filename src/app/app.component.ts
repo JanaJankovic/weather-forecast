@@ -15,7 +15,10 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  //Global static object
   public appPages: PageModel[] = Constants.appPages;
+
+  //Global dynamic objects
   public favorites: CityModel[] = [];
   public currentCity: CityModel;
   public settings: SettingsModel;
@@ -28,7 +31,12 @@ export class AppComponent implements OnInit {
     private menu: MenuController
   ) {}
 
-
+  /**
+   * Loads language from settings or set it to english in case no language is preferred
+   * Loads all dynamic objects
+   * Subscribes for changes of global objects
+   * Translates change of language in case of such an event
+   */
   ngOnInit() {
     let lang = this.stateService.getSettings().lang;
     lang = lang === undefined ? 'en' : lang;
@@ -39,20 +47,28 @@ export class AppComponent implements OnInit {
     this.settings = this.stateService.getSettings();
 
     this.eventService.getCityObservable().subscribe({
-      next: (data) => { this.currentCity = data; },
+      next: (data) => {
+        this.currentCity = data;
+      },
     });
 
     this.eventService.getFavoritesObservable().subscribe({
-      next: (data) => { this.favorites = data; },
+      next: (data) => {
+        this.favorites = data;
+      },
     });
 
     this.eventService.getSettingObservable().subscribe({
       next: (data) => {
         this.translateService.use(data.lang);
-       },
+      },
     });
   }
 
+  /**
+   * On clicked favorite city, current city changes and user is redirected to home page
+   * @param city
+   */
   public onFavClick(city: CityModel) {
     this.menu.close('main-menu');
     this.stateService.setCurrentCity(city);

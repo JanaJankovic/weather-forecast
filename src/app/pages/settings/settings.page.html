@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <!--TOOLBAR MOBILE-->
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,6 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
+ <!--TOOLBAR FULLSCREEN-->
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -15,9 +17,13 @@
   </ion-header>
 
   <ion-grid>
+    <!--SETTINGS ROW-->
     <ion-row>
+
+      <!--SETTINGS LIST-->
       <ion-list *ngIf="settings !== undefined">
 
+        <!--LANGUAGES DROPDOWN-->
         <ion-item>
           <ion-label slot="start">{{'selectLang' | translate}}</ion-label>
           <ion-select slot="end"
@@ -29,6 +35,7 @@
           </ion-select>
         </ion-item>
 
+        <!--UNITS DROPDOWN-->
         <ion-item>
           <ion-label slot="start">{{'selectUnit' | translate}}</ion-label>
           <ion-select slot="end"
@@ -41,6 +48,9 @@
         </ion-item>
 
       </ion-list>
+
     </ion-row>
+
   </ion-grid>
+
 </ion-content>

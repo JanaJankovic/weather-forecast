@@ -1,3 +1,6 @@
+/**
+ * Model made after API response for easier coding
+ */
 export class ForecastModel{
   cod: string;
   message: string;

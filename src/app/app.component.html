@@ -2,7 +2,9 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay" menuId="main-menu">
       <ion-content>
-        <ion-list id="inbox-list">
+
+        <!--PAGES-->
+        <ion-list id="pages-list">
           <ion-list-header>{{'forecast' | translate}}</ion-list-header>
           <ion-note *ngIf="currentCity !== undefined">{{currentCity.name}}, {{currentCity.country}}</ion-note>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
@@ -14,14 +16,16 @@
           </ion-menu-toggle>
         </ion-list>
 
-        <ion-list id="labels-list">
+        <!--FAVORITE CITIES-->
+        <ion-list id="favs-list">
           <ion-list-header>{{ "favorites" | translate }}</ion-list-header>
-
           <ion-item *ngFor="let favorite of favorites" lines="none" (click)="onFavClick(favorite)">
             <ion-icon slot="start" ios="location-outline" md="location-sharp"></ion-icon>
             <ion-label>{{ favorite.name }}, {{favorite.country}}</ion-label>
           </ion-item>
         </ion-list>
+
+
       </ion-content>
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>

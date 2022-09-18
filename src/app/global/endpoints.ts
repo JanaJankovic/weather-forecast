@@ -1,3 +1,6 @@
+/**
+ * All API endpoints used in this project
+ */
 export class ApiEndpoints {
   public static currentWeatherApiEndpoint =
     'https://api.openweathermap.org/data/2.5/weather';

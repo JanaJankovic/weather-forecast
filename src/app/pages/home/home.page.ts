@@ -8,7 +8,7 @@ import { CityModel } from 'src/app/models/city.model';
 import { WeatherModel } from 'src/app/models/weather.model';
 import { ForecastModel } from 'src/app/models/forecast.model';
 import { Utils } from 'src/app/global/utils';
-import { LoadingController} from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import { EventService } from 'src/app/services/event.service';
 import { SettingsModel } from 'src/app/models/settings.model';
 
@@ -18,15 +18,21 @@ import { SettingsModel } from 'src/app/models/settings.model';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  //Data for querying API
   public currentCity: CityModel = undefined;
   public currentLocation: CityModel = undefined;
-  public isInFavorites = false;
-  public smallIconAlignment = window.innerWidth < 400 ? 'start' : 'end';
 
+  //State of button
+  public isInFavorites = false;
+
+  //Data for displaying
   public weather: WeatherModel = undefined;
   public forecast: ForecastModel = undefined;
 
   public settings: SettingsModel;
+
+  //Alignment of data for forecast item
+  public smallIconAlignment = window.innerWidth < 400 ? 'start' : 'end';
 
   constructor(
     private translateService: TranslateService,
@@ -37,11 +43,19 @@ export class HomePage implements OnInit {
     public eventService: EventService
   ) {}
 
+  /**
+   * Changes alignment of data based on screen size
+   * @param event
+   */
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.smallIconAlignment = event.target.innerWidth < 400 ? 'start' : 'end';
   }
 
+  /**
+   * Loads data from local storage and afterwards fetches fresh data
+   * Subscribed for change of city for appropriate update of data
+   */
   ngOnInit() {
     this.weather = this.stateService.getLastWeather();
     this.forecast = this.stateService.getLastForecast();
@@ -50,7 +64,7 @@ export class HomePage implements OnInit {
     this.settings =
       this.settings !== undefined
         ? this.settings
-        : { lang: 'en', unit: 'standard'};
+        : { lang: 'en', unit: 'standard' };
 
     this.loadData();
 
@@ -70,6 +84,10 @@ export class HomePage implements OnInit {
     await this.getData();
   }
 
+  /**
+   * Function set current city based on data saved in local storage
+   * Or current location
+   */
   public async setCurrentCity() {
     this.currentCity = this.stateService.getCurrentCity();
     await this.getCurrentLocation();
@@ -83,6 +101,10 @@ export class HomePage implements OnInit {
     );
   }
 
+  /**
+   * Gets coordinates of current location
+   * By reverse geocoding gets name of city and country
+   */
   public async getCurrentLocation() {
     const loading = this.loadingCtrl.create({ spinner: 'crescent' });
     (await loading).present();
@@ -114,6 +136,11 @@ export class HomePage implements OnInit {
     (await loading).dismiss();
   }
 
+  /**
+   * Based on geo coordinates makes request for weather and forecast
+   * Uses Utility functions to modify data
+   * Saves data to local storage
+   */
   public async getData() {
     const loading = this.loadingCtrl.create({ spinner: 'crescent' });
     (await loading).present();
@@ -152,13 +179,21 @@ export class HomePage implements OnInit {
     (await loading).dismiss();
   }
 
+  /**
+   * Updates Weather details based on selected date
+   * @param obj weather data of selected date
+   */
   public onItemListClick(obj) {
     this.weather = obj;
-    if(window.innerWidth < 500){
+    if (window.innerWidth < 500) {
       document.querySelector('ion-content').scrollToPoint(0, 100);
     }
   }
 
+  /**
+   * Adds or removes current city for list of favorite cities
+   * Updates state of button required for the right icon
+   */
   public onFavoritesBtnClick() {
     this.isInFavorites = this.stateService.cityExistsInFavorites(
       this.currentCity

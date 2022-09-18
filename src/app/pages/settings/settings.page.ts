@@ -10,12 +10,19 @@ import { StateService } from 'src/app/services/state.service';
   styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
+  //Data from constants
   public langs: LanguageModel[] = Constants.langs;
   public units = Constants.units;
+
+  //Data for updating
   public settings: SettingsModel;
 
   constructor(private stateService: StateService) {}
 
+  /**
+   * Gets saved settigns
+   * In case of undefined set defaults
+   */
   ngOnInit() {
     this.settings = this.stateService.getSettings();
     this.settings = this.settings !== undefined
@@ -23,6 +30,10 @@ export class SettingsPage implements OnInit {
         : { lang: 'en', unit: 'standard'};
   }
 
+  /**
+   * Saves updated settings to local storage
+   * @param e
+   */
   handleUpdate(e) {
     this.stateService.setSettings(this.settings);
   }

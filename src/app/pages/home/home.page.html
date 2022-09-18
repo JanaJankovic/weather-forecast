@@ -1,4 +1,5 @@
 <ion-header [translucent]="true">
+  <!--TOOLBAR FOR MOBILE-->
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,6 +8,7 @@
   </ion-toolbar>
 </ion-header>
 
+  <!--TOOLBAR FULLSCREEEN -->
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
@@ -14,20 +16,25 @@
     </ion-toolbar>
   </ion-header>
 
-
+  <!--RESIZABLE CONTENT -->
   <ion-grid *ngIf="weather !== undefined" id="resizableContent">
 
+  <!--BUTTON CONTROLS ROW -->
     <ion-row id="controls">
+
+      <!--FAVORITES CONTROL BUTTON -->
       <ion-button *ngIf="weather !== undefined" (click)="onFavoritesBtnClick()" fill="clear" shape="round">
         <ion-icon size="large" name="heart-outline" *ngIf="isInFavorites === false" ></ion-icon>
         <ion-icon size="large" name="heart" *ngIf="isInFavorites !== false"></ion-icon>
       </ion-button>
 
+      <!--REFRESH CONTROL BUTTON -->
       <ion-button (click)="getData()" fill="clear" shape="round">
         <ion-icon size="large" name="refresh-outline"></ion-icon>
       </ion-button>
     </ion-row>
 
+  <!--TIMESTAMP ROW-->
     <ion-row id="timestamp">
       <div>
         <ion-icon id="main-icon" name={{weather.weather[0].ionic}}></ion-icon>
@@ -36,9 +43,10 @@
       </div>
     </ion-row>
 
-
+    <!--WEATHER DATA ROW -->
     <ion-row id="data-content">
 
+      <!--WEATHER DETAILS COLUMN -->
       <ion-col sizeMd="6" sizeSm="6" sizeXs="12" id="weather-col">
         <div id="weather-content">
           <ion-title>{{'weather' | translate}}</ion-title>
@@ -87,11 +95,11 @@
               <ion-label>{{'pressure' | translate}}</ion-label>
               <ion-title>{{weather.main.pressure}} hPa</ion-title>
             </ion-card>
-
           </div>
         </div>
       </ion-col>
 
+      <!--FORECAST FOR 5 DAYS COL -->
       <ion-col sizeMd="6" sizeSm="6" sizeXs="12" id="forecast-col" *ngIf="forecast !== undefined">
         <ion-title>{{'forecast5' | translate}}</ion-title>
         <ion-list id="forecast-list">
@@ -109,4 +117,5 @@
     </ion-row>
 
   </ion-grid>
+
 </ion-content>

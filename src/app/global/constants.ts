@@ -1,6 +1,10 @@
 import { PageModel } from '../models/page.model';
 import { LanguageModel } from '../models/language.model';
 
+/**
+ * All global constants used in code
+ * Only variables that are static and don't change like pages, units and languages
+ */
 export class Constants {
   public static appPages: PageModel[] = [
     { title: 'home', url: 'home', icon: 'home' },

@@ -10,8 +10,11 @@ import { StateService } from 'src/app/services/state.service';
   styleUrls: ['./search.page.scss'],
 })
 export class SearchPage implements OnInit {
-  public cities = [];
+  //Input string
   public input = '';
+
+  //Received cities
+  public cities = [];
 
   constructor(
     private networkService: NetworkService,
@@ -22,12 +25,19 @@ export class SearchPage implements OnInit {
 
   ngOnInit() {}
 
+  /**
+   * Function requests list of cities based on input string
+   */
   public async getData() {
     this.cities = await this.networkService
       .getGeoCities(this.input)
       .toPromise();
   }
 
+  /**
+   * Updates current city and redirects to home page
+   * @param obj clicked city item
+   */
   public itemClicked(obj) {
     this.input = '';
     this.cities = [];

@@ -15,7 +15,10 @@ import { StateService } from 'src/app/services/state.service';
   styleUrls: ['./maps.page.scss'],
 })
 export class MapsPage implements OnInit {
+  //Data for loading coordinates
   public currentCity: CityModel;
+
+  //Data for loading map
   public map: L.Map;
   public icon = L.icon({
     iconSize: [25, 41],
@@ -24,6 +27,8 @@ export class MapsPage implements OnInit {
     iconUrl: 'https://unpkg.com/leaflet@1.5.1/dist/images/marker-icon.png',
   });
   public marker: L.Marker = undefined;
+
+  //Publicly scoped cooridnates for current city update
   public latlng;
 
   constructor(
@@ -35,6 +40,12 @@ export class MapsPage implements OnInit {
     public loadingCtrl: LoadingController
   ) {}
 
+  /**
+   * Function listens for the event where click occured inside
+   * Of marker popup content which allows for redirtection to
+   * Home page and updating of the current city
+   * @param event click event
+   */
   @HostListener('document:click', ['$event'])
   clickout(event) {
     if (event.target.classList.contains('originalClass')) {
@@ -42,6 +53,16 @@ export class MapsPage implements OnInit {
     }
   }
 
+  /**
+   * Gets current city or redirects to home page where if city is undefined
+   * Function that gets current location will be triggered
+   * Subscribes for city update so that map will be refreshed
+   * Ceneters map by coordinates of the current city
+   * Adds tiled layers
+   * Because of wrong loading on bigger screens, timeout makes sure map laods correctly
+   * Adds marker to map
+   * Listents to mouse click events for changing position of the marker
+   */
   ngOnInit() {
     this.currentCity = this.stateService.getCurrentCity();
     if (this.currentCity === undefined) {
@@ -76,6 +97,11 @@ export class MapsPage implements OnInit {
     this.map.on('click', (e) => this.onMapClick(e));
   }
 
+  /**
+   * Removes old marker and adds new marker
+   * Shows popup for redicretion to home page
+   * @param e coordinates of clicked point on map
+   */
   public onMapClick(e) {
     this.latlng = e.latlng;
 
@@ -97,11 +123,19 @@ export class MapsPage implements OnInit {
       .openOn(this.map);
   }
 
+  /**
+   * On popup clicked changes city and navigates to home
+   */
   public async onPopupClick() {
     await this.changeCurrentCity();
     this.router.navigate(['/home']);
   }
 
+  /**
+   * Updates current cities coordinates
+   * By reverse geocoding gets name and country of the city
+   * Saves city to local storage
+   */
   public async changeCurrentCity(){
     const loading = this.loadingCtrl.create({spinner: 'crescent'});
     (await loading).present();
