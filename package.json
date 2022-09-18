@@ -5,12 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build",
-    "start": "node server.js"
+    "e2e": "ng e2e"
   },
   "engines": {
     "node": "16.14.2",
