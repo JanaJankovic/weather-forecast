@@ -9,7 +9,9 @@
     "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",
+    "heroku-postbuild": "ng build --configuration=production"
   },
   "engines": {
     "node": "16.14.2",
