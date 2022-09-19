@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
     this.settings = this.stateService.getSettings();
 
     if(this.settings === null || this.settings === undefined) {
-      this.settings = {lang: 'en', unit: 'standard'};
+      this.settings = Constants.defaultSettings;
       this.stateService.setSettings(this.settings);
     }
 

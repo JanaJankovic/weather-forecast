@@ -11,6 +11,7 @@ import { Utils } from 'src/app/global/utils';
 import { LoadingController } from '@ionic/angular';
 import { EventService } from 'src/app/services/event.service';
 import { SettingsModel } from 'src/app/models/settings.model';
+import { Constants } from 'src/app/global/constants';
 
 @Component({
   selector: 'app-home',
@@ -130,7 +131,7 @@ export class HomePage implements OnInit {
       })
       .catch((error) => {
         console.log('Error getting location', error);
-        return undefined;
+        return Constants.defaultLocation;
       });
 
     (await loading).dismiss();

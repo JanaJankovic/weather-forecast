@@ -1,5 +1,7 @@
 import { PageModel } from '../models/page.model';
 import { LanguageModel } from '../models/language.model';
+import { CityModel } from '../models/city.model';
+import { SettingsModel } from '../models/settings.model';
 
 /**
  * All global constants used in code
@@ -21,4 +23,16 @@ export class Constants {
     { code: 'fr', label: 'Français' },
     { code: 'de', label: 'Deutch' },
   ];
+
+  public static defaultLocation: CityModel = {
+    name: 'Maribor',
+    country: 'SI',
+    lat: 46.5547222,
+    lon: 15.6466667
+  }
+
+  public static defaultSettings: SettingsModel = {
+    lang: 'en',
+    unit: 'standard'
+  }
 }
