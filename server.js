@@ -20,7 +20,7 @@ app.use(function(req, res, next) {
   res.header("Referrer-Policy", "same-origin");
   res.header(
     "Content-Security-Policy-Report-Only",
-  "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self';");
+  "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'sha256-HashDigestHere='; style-src 'sha256-HashDigestHere='; frame-src 'self';");
   res.header(
     "Report-To",
     '{"group":"csp-endpoint","max_age":10886400,"endpoints":[{"url":"https://nomnio-weather-forecast.herokuapp.com/__cspreport__"}],"include_subdomains":true}'
