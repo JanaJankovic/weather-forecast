@@ -38,13 +38,16 @@ export class AppComponent implements OnInit {
    * Translates change of language in case of such an event
    */
   ngOnInit() {
-    let lang = this.stateService.getSettings().lang;
-    lang = lang === undefined ? 'en' : lang;
-    this.translateService.setDefaultLang(lang);
+    this.translateService.setDefaultLang('en');
 
     this.currentCity = this.stateService.getCurrentCity();
     this.favorites = this.stateService.getFavorites();
     this.settings = this.stateService.getSettings();
+
+    if(this.settings === null || this.settings === undefined) {
+      this.settings = {lang: 'en', unit: 'standard'};
+      this.stateService.setSettings(this.settings);
+    }
 
     this.eventService.getCityObservable().subscribe({
       next: (data) => {
