@@ -18,7 +18,7 @@ app.use(function(req, res, next) {
   res.header("X-Content-Type-Options", "nosniff");
   res.header("Permissions-Policy", "geolocation=(self 'https://nomnio-weather-forecast.herokuapp.com/')");
   res.header("Referrer-Policy", "same-origin");
-  res.header("Content-Security-Policy", "default-src 'self'; style-src 'self'; script-src 'self';");
+  res.header("Content-Security-Policy-Report-Only", "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self';");
   next();
 });
 
