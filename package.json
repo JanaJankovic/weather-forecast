@@ -6,7 +6,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration=production",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -23,6 +23,9 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@angular-devkit/build-angular": "^14.0.0",
+    "@angular/compiler-cli": "^14.0.0",
+    "@angular/language-service": "^14.0.0",
     "@awesome-cordova-plugins/geolocation": "^5.45.0",
     "@capacitor/android": "^4.2.0",
     "@capacitor/app": "4.0.1",
