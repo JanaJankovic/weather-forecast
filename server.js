@@ -18,12 +18,30 @@ app.use(function(req, res, next) {
   res.header("X-Content-Type-Options", "nosniff");
   res.header("Permissions-Policy", "geolocation=(self 'https://nomnio-weather-forecast.herokuapp.com/')");
   res.header("Referrer-Policy", "same-origin");
-  res.header("Content-Security-Policy-Report-Only", "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self';");
+  res.header(
+    "Content-Security-Policy-Report-Only",
+  "default-src 'self'; font-src 'self'; img-src 'self'; script-src 'self'; style-src 'self'; frame-src 'self';");
+  res.header(
+    "Report-To",
+    '{"group":"csp-endpoint","max_age":10886400,"endpoints":[{"url":"https://nomnio-weather-forecast.herokuapp.com/__cspreport__"}],"include_subdomains":true}'
+  );
   next();
 });
 
 app.use(express.static('www'));
+app.use(
+  bodyParser.json({
+    type: ['application/json', 'application/csp-report', 'application/reports+json'],
+  })
+);
+
+
 app.set('port', process.env.PORT || 5000);
+
+app.post('/__cspreport__', (req, res) => {
+  console.log(req.body);
+});
+
 app.listen(app.get('port'), function () {
   console.log('Express server listening on port ' + app.get('port'));
 });
