@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LoadingController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import * as L from 'leaflet';
+import { Constants } from 'src/app/global/constants';
 import { CityModel } from 'src/app/models/city.model';
 import { QueryModel } from 'src/app/models/query.model';
 import { EventService } from 'src/app/services/event.service';
@@ -118,7 +119,7 @@ export class MapsPage implements OnInit {
         `<p class="originalClass"
         style="padding: 20px 0px 20px 0px; cursor: pointer">` +
           this.translateService.instant('clickForecast') +
-        `</p>`
+          `</p>`
       )
       .openOn(this.map);
   }
@@ -136,8 +137,8 @@ export class MapsPage implements OnInit {
    * By reverse geocoding gets name and country of the city
    * Saves city to local storage
    */
-  public async changeCurrentCity(){
-    const loading = this.loadingCtrl.create({spinner: 'crescent'});
+  public async changeCurrentCity() {
+    const loading = this.loadingCtrl.create({ spinner: 'crescent' });
     (await loading).present();
     const query: QueryModel = new QueryModel();
     query.lat = this.latlng.lat;
@@ -145,11 +146,18 @@ export class MapsPage implements OnInit {
 
     const res = await this.networkService.getReverseGeoCity(query).toPromise();
 
+    if (res === undefined) {
+      return Constants.defaultLocation;
+    }
+
+    const n = res.features[0].properties.city;
+    const c = res.features[0].properties.country_code.toUpperCase();
+
     this.stateService.setCurrentCity({
       lat: this.latlng.lat,
       lon: this.latlng.lng,
-      name: res !== undefined && res.length > 0 ? res[0].name : undefined,
-      country: res !== undefined && res.length > 0 ? res[0].country : undefined,
+      name: n,
+      country: c,
     });
     (await loading).dismiss();
   }

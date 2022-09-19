@@ -7,5 +7,5 @@ export class ApiEndpoints {
   public static forecastApiEndpoint =
     'https://api.openweathermap.org/data/2.5/forecast';
   public static geoApiEndpoint = 'https://api.api-ninjas.com/v1/city';
-  public static reverseGeoApiEndoipint = 'https://api.api-ninjas.com/v1/reversegeocoding';
+  public static reverseGeoApiEndoipint = 'https://api.geoapify.com/v1/geocode/reverse';
 }

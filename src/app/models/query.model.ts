@@ -14,17 +14,22 @@ export class QueryModel {
    * Method joins all propertieds into query for url
    * @returns query paramters for url
    */
-  public getQueryUrl() {
+  public getQueryUrl(apiType: string) {
     const urlSearchParams = new URLSearchParams();
-    urlSearchParams.append('appid', TempEnv.apiKey);
+    switch(apiType) {
+      case 'weather':
+      case 'forecast' :
+        urlSearchParams.append('appid', TempEnv.apiKey);
+        urlSearchParams.append('units', this.units !== undefined ? this.units : '');
+        urlSearchParams.append('lang', this.lang !== undefined ? this.lang : '');
+        break;
+      case 'reverse':
+        urlSearchParams.append('apiKey', TempEnv.reverseGeoApiKey);
+        break;
+    }
+
     urlSearchParams.append('lat', this.lat.toString());
     urlSearchParams.append('lon', this.lon.toString());
-    urlSearchParams.append('units', this.units !== undefined ? this.units : '');
-    urlSearchParams.append('lang', this.lang !== undefined ? this.lang : '');
-    urlSearchParams.append(
-      'cnt',
-      this.cnt !== undefined ? this.cnt.toString() : ''
-    );
 
     return urlSearchParams.toString();
   }

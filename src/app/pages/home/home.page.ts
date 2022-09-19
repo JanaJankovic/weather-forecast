@@ -117,16 +117,20 @@ export class HomePage implements OnInit {
         query.lat = resp.coords.latitude;
         query.lon = resp.coords.longitude;
 
-        const res = await this.networkService
-          .getReverseGeoCity(query)
-          .toPromise();
+        const res = await this.networkService.getReverseGeoCity(query).toPromise();
+
+        if (res === undefined) {
+          return Constants.defaultLocation;
+        }
+
+        const n = res.features[0].properties.city;
+        const c = res.features[0].properties.country.toUpperCase();
 
         return {
           lat: resp.coords.latitude,
           lon: resp.coords.longitude,
-          name: res !== undefined && res.length > 0 ? res[0].name : undefined,
-          country:
-            res !== undefined && res.length > 0 ? res[0].country : undefined,
+          name: n,
+          country: c,
         };
       })
       .catch((error) => {
