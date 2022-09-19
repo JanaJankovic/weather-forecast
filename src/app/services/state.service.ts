@@ -31,7 +31,10 @@ export class StateService {
    */
   public getSettings(): SettingsModel {
     this.settings = JSON.parse(localStorage.getItem('settings'));
-    this.settings = this.settings !== null ? this.settings : undefined;
+    this.settings =
+      this.settings !== null || this.settings !== undefined
+        ? this.settings
+        : { lang: 'en', unit: 'standard' };
     return this.settings;
   }
 
